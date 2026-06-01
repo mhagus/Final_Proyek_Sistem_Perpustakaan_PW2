@@ -1,55 +1,37 @@
-# Tugas Pertemuan 9: Pengenalan Framework Laravel & MVC
+# 📚 Sistem Manajemen Perpustakaan Laravel
+
+**Tugas Praktikum Pemrograman Website 2 - Pertemuan 11 (Controller & View MVC)**
+
+Sistem ini dibangun menggunakan arsitektur MVC (Model-View-Controller) pada *framework* Laravel. Pembaruan pada versi ini mencakup pembuatan antarmuka *Dashboard* interaktif, implementasi *Blade Component* untuk *reusability* elemen UI, serta sistem pencarian dan filter tingkat lanjut berbasis kueri Eloquent.
 
 ---
 
-## 👤 Identitas Mahasiswa
+## 👨‍💻 Identitas Pengembang
 * **Nama:** Muhammad Agus
 * **NIM:** 60324026
-* **Kelas:** B
+* **Program Studi:** Informatika
+* **Mata Kuliah:** Pemrograman Website 2
 
 ---
 
-## 💻 Daftar Endpoint & Konfigurasi Routing (URL)
+## ✨ Fitur Utama (Capaian Penugasan)
 
-Berikut adalah pemetaan seluruh *route* yang terdaftar di dalam file `routes/web.php` beserta fungsi dan penamaannya (*named routes*):
-
-| HTTP Method | URL Path | Nama Route (`name`) | Controller / Closure | Deskripsi Tampilan / Fitur |
-| :--- | :--- | :--- | :--- | :--- |
-| **GET** | `/` | *-* | *Closure* | Halaman selamat datang (*welcome page*) bawaan Laravel. |
-| **GET** | `/perpustakaan` | *-* | `PerpustakaanController@index` | Menampilkan dashboard utama dan daftar 5 koleksi buku informatika. |
-| **GET** | `/buku/{id}` | *-* | `PerpustakaanController@show` | Menampilkan informasi detail spesifik buku (penerbit, tahun, deskripsi). |
-| **GET** | `/about` | *-* | `PerpustakaanController@about` | Halaman informasi sistem perpustakaan dan identitas *developer*. |
-| **GET** | `/anggota` | `anggota.index` | *Closure* | Menampilkan tabel daftar 5 anggota perpustakaan baru (Hendra, Citra, dll). |
-| **GET** | `/anggota/{id}`| `anggota.show` | *Closure* | Menampilkan kartu profil (*card*) detail lengkap dan status aktif anggota. |
-| **GET** | `/kategori` | `kategori.index` | `KategoriController@index` | Menampilkan grid kartu (*card*) rumpun kategori buku baru (AI, Cloud, dll). |
-| **GET** | `/kategori/{id}`| `kategori.show` | `KategoriController@show` | Menampilkan detail deskripsi kategori beserta daftar buku di dalamnya. |
-| **GET** | `/kategori/search/{keyword}` | `kategori.search` | `KategoriController@search` | Menampilkan hasil pencarian kategori yang cocok dengan *keyword* (*highlighted*). |
-
-
-## 📸 Dokumentasi Antarmuka (Screenshot)
-
-Berikut adalah bukti pengerjaan implementasi sistem yang telah disinkronkan:
-
-### 1. Tugas 1: Modul Anggota Perpustakaan
-* **Halaman Daftar Anggota (Index):**
-  Menampilkan seluruh data 5 anggota baru dalam bentuk tabel Bootstrap 5.
-  ![Daftar Anggota](image/anggota.png)
-
-* **Halaman Detail Anggota (Show):**
-  Menampilkan informasi lengkap spesifik anggota menggunakan komponen Card Bootstrap 5.
-  ![Detail Anggota](image/anggota1.png)
+1. **Dashboard Interaktif (Tugas 1):** Menampilkan kalkulasi statistik *real-time* perpustakaan (Total Buku, Ketersediaan Stok, Status Anggota) dan merender 5 data entri terbaru.
+2. **Blade Component Modular (Tugas 2):** Menggunakan arsitektur `<x-buku-card>` untuk merender daftar buku secara terisolasi, efisien, dan konsisten di berbagai halaman.
+3. **Advanced Search & Filter (Tugas 3):** Mekanisme kueri komprehensif untuk menyaring *database* berdasarkan gabungan Kata Kunci, Kategori, Tahun Terbit, dan Status Stok.
 
 ---
 
-### 2. Tugas 2: Modul Kategori Buku (MVC)
-* **Halaman Daftar Kategori (Index):**
-  Menampilkan visualisasi rumpun kategori baru informatika dalam bentuk Grid Card.
-  ![Daftar Kategori](image/kategori.png)
+## 📸 Dokumentasi Antarmuka
 
-* **Halaman Detail Kategori & Buku (Show):**
-  Menampilkan deskripsi kategori beserta relasi daftar koleksi buku di dalamnya.
-  ![Detail Kategori](image/kategori1.png)
+### 1. Halaman Dashboard
+Menampilkan ringkasan aktivitas dan metrik data utama perpustakaan.
+![Halaman Dashboard](home2.png)
 
-* **Halaman Hasil Pencarian Kategori (Search):**
-  Menampilkan hasil pencarian kategori yang cocok dengan kata kunci yang dimasukkan oleh pengguna.
-  ![Hasil Pencarian Kategori](image/kategori_search.png)
+### 2. Halaman Katalog Buku & Filter
+Implementasi *Blade Component* pada daftar buku terintegrasi dengan form pencarian spesifik.
+![Halaman Buku](buku2.png)
+
+### 3. Halaman Manajemen Anggota
+Menampilkan daftar anggota yang telah didaftarkan melalui sistem basis data.
+![Halaman Anggota](anggota2.png)
