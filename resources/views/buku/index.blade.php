@@ -127,7 +127,7 @@
 </div>
 
 {{-- Daftar Buku menggunakan Blade Component (Tugas 2) --}}
-
+@forelse ($bukus as $buku)
     <x-buku-card :buku="$buku" />
 @empty
     <div class="alert alert-info">
