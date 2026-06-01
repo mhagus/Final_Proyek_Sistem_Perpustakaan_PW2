@@ -26,12 +26,12 @@ Sistem ini dibangun menggunakan arsitektur MVC (Model-View-Controller) pada *fra
 
 ### 1. Halaman Dashboard
 Menampilkan ringkasan aktivitas dan metrik data utama perpustakaan.
-![Halaman Dashboard](home2.png)
+![Halaman Dashboard](image/home2.png)
 
 ### 2. Halaman Katalog Buku & Filter
 Implementasi *Blade Component* pada daftar buku terintegrasi dengan form pencarian spesifik.
-![Halaman Buku](buku2.png)
+![Halaman Buku](image/buku2.png)
 
 ### 3. Halaman Manajemen Anggota
 Menampilkan daftar anggota yang telah didaftarkan melalui sistem basis data.
-![Halaman Anggota](anggota2.png)
+![Halaman Anggota](image/anggota2.png)
