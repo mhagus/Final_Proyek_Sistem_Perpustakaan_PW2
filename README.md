@@ -16,10 +16,11 @@
 ## 📸 Dokumentasi Antarmuka
 
 ### Tugas 1
-(image/tugas1_12.png)
+![Tugas 1](image/tugas1_12.png)
 
-### 2.Tugas 2
-(image/tugas2_12.png)
-(image/konfirmasi_12.png)
-### 3. Tugas 3
-(image/csv_12.png)
+### Tugas 2
+![Tugas 2](image/tugas2_12.png)
+![Konfirmasi Hapus](image/konfirmasi_12.png)
+
+### Tugas 3
+![Tugas 3](image/csv_12.png)
