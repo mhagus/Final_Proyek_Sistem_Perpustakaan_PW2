@@ -39,6 +39,15 @@
                 <a href="{{ route('buku.edit', $buku->id) }}" class="btn btn-outline-secondary btn-sm flex-fill" style="border-width: 2px;">
                     Edit
                 </a>
+                
+                {{--Delete Operation --}}
+                <form action="{{ route('buku.destroy', $buku->id) }}" method="POST" class="flex-fill m-0" onsubmit="return confirm('Apakah Anda yakin ingin menghapus buku \'{{ $buku->judul }}\'?')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-outline-danger btn-sm w-100" style="border-width: 2px;">
+                        Hapus
+                    </button>
+                </form>
             </div>
         @endif
 
