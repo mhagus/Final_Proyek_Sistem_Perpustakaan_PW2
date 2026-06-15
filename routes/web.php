@@ -23,6 +23,9 @@ Route::get('/buku/export/csv', [BukuController::class, 'exportCsv'])->name('buku
 //  Bulk Delete 
 Route::delete('/buku/bulk-delete', [BukuController::class, 'bulkDelete'])->name('buku.bulk-delete');
 
+// custom route untuk export anggota
+Route::get('/anggota/export', [AnggotaController::class, 'export'])->name('anggota.export');
+Route::get('/anggota/search', [AnggotaController::class, 'search'])->name('anggota.search');
 
 // Route Resource Utama
 Route::resource('buku', BukuController::class);
