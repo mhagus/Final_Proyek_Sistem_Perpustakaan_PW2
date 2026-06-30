@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Buku;
 use App\Models\Anggota;
+use App\Models\Transaksi;
 
 class DashboardController extends Controller
 {
@@ -21,8 +22,21 @@ class DashboardController extends Controller
         $anggotaAktif = Anggota::where('status', 'Aktif')->count();
         $anggotaNonaktif = Anggota::where('status', '!=', 'Aktif')->count();
 
+        $totalTransaksi = Transaksi::count();
+        $sedangDipinjam = Transaksi::where('status', 'Dipinjam')->count();
+        $transaksiHariIni = Transaksi::whereDate('created_at', today())->count();
+
         $bukuTerbaru = Buku::latest()->take(5)->get();
         $anggotaTerbaru = Anggota::latest()->take(5)->get();
+
+        // Tugas 3: Data buku terlambat untuk dashboard widget
+        $transaksiTerlambat = Transaksi::with(['anggota', 'buku'])
+            ->where('status', 'Dipinjam')
+            ->where('tanggal_kembali', '<', now())
+            ->latest()
+            ->get();
+
+        $jumlahTerlambat = $transaksiTerlambat->count();
 
         return view('dashboard', compact(
             'totalBuku',
@@ -31,8 +45,13 @@ class DashboardController extends Controller
             'totalAnggota',
             'anggotaAktif',
             'anggotaNonaktif',
+            'totalTransaksi',
+            'sedangDipinjam',
+            'transaksiHariIni',
             'bukuTerbaru',
-            'anggotaTerbaru'
+            'anggotaTerbaru',
+            'transaksiTerlambat',
+            'jumlahTerlambat'
         ));
     }
 }

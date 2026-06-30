@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
  
 use Illuminate\Http\Request;
 use App\Models\Anggota;
-use App\Exports\AnggotaExport;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\StoreAnggotaRequest;
+use App\Http\Requests\UpdateAnggotaRequest;
  
 class AnggotaController extends Controller
 {
@@ -43,7 +43,7 @@ class AnggotaController extends Controller
         $tahun = date('Y');
         
         // Cari anggota terakhir di tahun ini
-        $lastAnggota = \App\Models\Anggota::whereYear('created_at', $tahun)
+        $lastAnggota = Anggota::whereYear('created_at', $tahun)
             ->orderBy('kode_anggota', 'desc')
             ->first();
 
@@ -66,7 +66,8 @@ class AnggotaController extends Controller
         $kodeAnggota = $this->generateKodeAnggota();
         return view('anggota.create', compact('kodeAnggota'));
     }
-    public function store(Request $request) 
+
+    public function store(StoreAnggotaRequest $request) 
     {
         try {
             // Create anggota baru dengan validated data
@@ -83,11 +84,13 @@ class AnggotaController extends Controller
                             ->with('error', 'Gagal menambahkan anggota: ' . $e->getMessage());
         }
     }
+
     public function edit(string $id) 
     {
         $anggota = Anggota::findOrFail($id);
         return view('anggota.edit', compact('anggota'));
     }
+
     public function update(UpdateAnggotaRequest $request, string $id)
     {
         try {
@@ -107,6 +110,7 @@ class AnggotaController extends Controller
                             ->with('error', 'Gagal mengupdate anggota: ' . $e->getMessage());
         }
     }
+
     public function destroy(string $id)
     {
         try {
@@ -127,14 +131,51 @@ class AnggotaController extends Controller
         }
     }
 
+    /**
+     * Export anggota ke CSV (tanpa dependensi Maatwebsite).
+     */
     public function export()
     {
-        return Excel::download(new AnggotaExport, 'anggota.xlsx');
+        $anggotas = Anggota::all();
+
+        $filename = 'anggota_' . date('Y-m-d_His') . '.csv';
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ];
+
+        $callback = function() use ($anggotas) {
+            $file = fopen('php://output', 'w');
+
+            fputcsv($file, [
+                'Kode', 'Nama', 'Email', 'Telepon', 'Alamat',
+                'Tanggal Lahir', 'Jenis Kelamin', 'Pekerjaan', 'Status', 'Tanggal Daftar',
+            ]);
+
+            foreach ($anggotas as $anggota) {
+                fputcsv($file, [
+                    $anggota->kode_anggota,
+                    $anggota->nama,
+                    $anggota->email,
+                    $anggota->telepon,
+                    $anggota->alamat,
+                    $anggota->tanggal_lahir ? $anggota->tanggal_lahir->format('Y-m-d') : '',
+                    $anggota->jenis_kelamin,
+                    $anggota->pekerjaan,
+                    $anggota->status,
+                    $anggota->tanggal_daftar ? $anggota->tanggal_daftar->format('Y-m-d') : '',
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 
     public function search(Request $request)
     {
-        $query = \App\Models\Anggota::query();
+        $query = Anggota::query();
 
         if ($request->keyword) {
             $query->where(function($q) use ($request) {

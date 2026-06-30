@@ -15,6 +15,10 @@
 
 ## 📸 Dokumentasi Antarmuka
 
-### Tugas 1
-![Tugas ](image/anggotacurd.png)
+![Dashboard ](image/home.png)
 
+![Transaksi ](image/transaksi.png)
+
+![Pinjam buku ](image/pinjam.png)
+
+![Laporan Transaksi ](image/laporan.png)

@@ -13,6 +13,21 @@
     </a>
 </div>
  
+{{-- Flash Messages --}}
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 {{-- Statistik --}}
 <div class="row mb-4">
     <div class="col-md-4">
@@ -92,7 +107,7 @@
  
 {{-- Tabel Anggota --}}
 <a href="{{ route('anggota.export') }}" class="btn btn-success mb-3">
-    <i class="bi bi-file-excel"></i> Export Excel
+    <i class="bi bi-file-earmark-arrow-down"></i> Export CSV
 </a>
 <div class="card">
     <div class="card-body">
@@ -159,6 +174,14 @@
                                        title="Edit">
                                         <i class="bi bi-pencil"></i>
                                     </a>
+                                    <form action="{{ route('anggota.destroy', $anggota->id) }}" method="POST" class="d-inline"
+                                          onsubmit="return confirm('Apakah Anda yakin ingin menghapus anggota {{ $anggota->nama }}?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
