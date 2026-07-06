@@ -11,7 +11,6 @@ Aplikasi Sistem Manajemen Perpustakaan berbasis web yang dibangun menggunakan **
 - [Persyaratan Sistem](#-persyaratan-sistem)
 - [Instalasi](#-instalasi)
 - [Struktur Database](#-struktur-database)
-- [Route & Endpoint](#-route--endpoint)
 - [Dokumentasi Tampilan](#-dokumentasi-tampilan)
 - [Struktur Folder](#-struktur-folder)
 
@@ -237,9 +236,9 @@ Halaman autentikasi pengguna menggunakan Laravel Breeze dengan desain modern.
 
 ---
 
-### 2. Database — Struktur Tabel
+### 2. Dashboard Profesional
 
-Struktur database MySQL yang digunakan dalam aplikasi.
+tampilan halaman dashboard.
 
 ![Database Struktur 1](image/db1.png)
 
