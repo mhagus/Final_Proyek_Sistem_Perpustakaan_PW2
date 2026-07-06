@@ -38,6 +38,15 @@
                     </ul>
                 </li>
             </ul>
+
+            {{-- Global Search --}}
+            <form class="d-flex me-3" action="{{ route('search') }}" method="GET">
+                <input class="form-control me-2" type="search" name="q"
+                       placeholder="Cari buku, anggota, transaksi..." value="{{ request('q') }}">
+                <button class="btn btn-outline-light" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
             
             <!-- User Dropdown (Right) -->
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

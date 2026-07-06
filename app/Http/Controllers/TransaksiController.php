@@ -110,24 +110,26 @@ class TransaksiController extends Controller
         try {
             DB::transaction(function () use ($id) {
                 $transaksi = Transaksi::findOrFail($id);
-                
-                // 1. Update transaksi
+
+                // Cek apakah sudah dikembalikan
+                if ($transaksi->status === 'Dikembalikan') {
+                    throw new \Exception('Buku sudah dikembalikan sebelumnya.');
+                }
+
                 $tanggalDikembalikan = now();
                 $denda = $this->hitungDenda($transaksi, $tanggalDikembalikan);
-                
+
                 $transaksi->update([
                     'status' => 'Dikembalikan',
                     'tanggal_dikembalikan' => $tanggalDikembalikan,
                     'denda' => $denda,
                 ]);
-                
-                // 2. Update stok buku (tambah 1)
+
                 $transaksi->buku->increment('stok');
             });
-            
+
             return redirect()->route('transaksi.show', $id)
                              ->with('success', 'Buku berhasil dikembalikan!');
-                             
         } catch (\Exception $e) {
             return redirect()->back()
                              ->with('error', 'Gagal mengembalikan buku: ' . $e->getMessage());

@@ -5,6 +5,8 @@ use App\Http\Controllers\BukuController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
  
 // Public routes (tanpa auth)
@@ -41,6 +43,12 @@ Route::middleware(['auth'])->group(function () {
     
     // Transaksi - CRUD
     Route::resource('transaksi', TransaksiController::class);
+
+    // Global Search (Praktikum 3)
+    Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+    // Laporan (Praktikum 4)
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
 });
  
 require __DIR__.'/auth.php';

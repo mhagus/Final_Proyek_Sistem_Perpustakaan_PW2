@@ -56,31 +56,7 @@
             </main>
         </div>
 
-        <footer class="bg-white py-5 mt-auto border-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 mb-4 mb-md-0">
-                        <h5 class="fw-bold"><i class="bi bi-book-fill text-primary me-2"></i>Sistem Perpustakaan</h5>
-                        <p class="text-muted small">Sistem Manajemen Perpustakaan menggunakan Laravel 12</p>
-                    </div>
-                    <div class="col-md-3 mb-4 mb-md-0">
-                        <h5 class="fw-bold">Menu</h5>
-                        <ul class="list-unstyled">
-                            <li class="mb-2"><a href="{{ route('dashboard') }}" class="text-decoration-none text-primary">Home</a></li>
-                            <li class="mb-2"><a href="{{ route('buku.index') }}" class="text-decoration-none text-primary">Buku</a></li>
-                            <li class="mb-2"><a href="{{ route('anggota.index') }}" class="text-decoration-none text-primary">Anggota</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <h5 class="fw-bold">Kontak</h5>
-                        <ul class="list-unstyled text-muted small">
-                            <li class="mb-2"><i class="bi bi-envelope me-2"></i>perpustakaan@example.com</li>
-                            <li class="mb-2"><i class="bi bi-telephone me-2"></i>(021) 1234-5678</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        @include('layouts.footer')
 
         <!-- Bootstrap 5 JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
